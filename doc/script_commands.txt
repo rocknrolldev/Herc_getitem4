@@ -5429,6 +5429,26 @@ command, creating a pet which is the same, but simultaneously exists in
 two eggs, and may hatch from either, although, I'm not sure what kind of a
 mess will this really cause.
 
+'getitem3' is advance version of 'getitem2' that also use Item Random Option as additional values.
+<RandomIDArray>    : Array variable of ID for item random option, see db/[pre-]re/item_options.conf
+<RandomValueArray> : Array variable of item random option's value.
+<RandomParamArray> : Array variable of item random option's param.
+
+'getitem4' is advance version of 'getitem3' that also use the grade as additional values.
+Valid grades are:
+	ITEM_GRADE_NONE			- No grade
+	ITEM_GRADE_D			- Grade D
+	ITEM_GRADE_C			- Grade C
+	ITEM_GRADE_B			- Grade B
+	ITEM_GRADE_A			- Grade A
+
+Example to get Crimson Weapon with Ghost property:
+	// +9 Crimson Dagger [2]
+	setarray .@OptID[0],RDMOPT_WEAPON_ATTR_TELEKINESIS;
+	setarray .@OptVal[0],0;
+	setarray .@OptParam[0],0;
+	getitem3 28705,1,1,9,0,0,0,0,0,.@OptID,.@OptVal,.@OptParam;
+
 ---------------------------------------
 *getitembound(<item id>, <amount>, <bound type>{, <account ID>})
 *getitembound("<item name>", <amount>, <bound type>{, <account ID>})
@@ -5448,6 +5468,10 @@ Valid item bound types are:
 
 *getitembound2(<item id>, <amount>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>, <bound type>)
 *getitembound2("<item name>", <amount>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>, <bound type>)
+*getitembound3(<item id>, <amount>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>, <bound type>, <RandomIDArray>, <RandomValueArray>, <RandomParamArray>{, <account ID>})
+*getitembound3("<item name>", <amount>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>, <bound type>, <RandomIDArray>, <RandomValueArray>, <RandomParamArray>{, <account ID>})
+*getitembound4(<item id>, <amount>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>, <bound type>, <grade>, <RandomIDArray>, <RandomValueArray>, <RandomParamArray>{, <account ID>})
+*getitembound4("<item name>", <amount>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>, <bound type>, <grade>, <RandomIDArray>, <RandomValueArray>, <RandomParamArray>{, <account ID>})
 
 This command behaves identically to getitem2(), but the items created will be
 bound to the target character as specified by the bound type. All items created
@@ -5455,6 +5479,26 @@ in this manner cannot be dropped, sold, vended, auctioned, or mailed, and in
 some cases cannot be traded or stored.
 
 For a list of bound types see getitembound().
+
+'getitembound3' is advance version of 'getitembound2' that also use Item Random Option as additional values.
+<RandomIDArray>    : Array variable of ID for item random option, see db/[pre-]re/item_options.conf
+<RandomValueArray> : Array variable of item random option's value.
+<RandomParamArray> : Array variable of item random option's param.
+
+'getitembound4' is advance version of 'getitembound3' that also use the grade as additional values.
+Valid grades are:
+	ITEM_GRADE_NONE			- No grade
+	ITEM_GRADE_D			- Grade D
+	ITEM_GRADE_C			- Grade C
+	ITEM_GRADE_B			- Grade B
+	ITEM_GRADE_A			- Grade A
+
+Example to get Crimson Weapon with Ghost property:
+	// +9 Crimson Dagger [2]
+	setarray .@OptID[0],RDMOPT_WEAPON_ATTR_TELEKINESIS;
+	setarray .@OptVal[0],0;
+	setarray .@OptParam[0],0;
+	getitembound3 28705,1,1,9,0,0,0,0,0,BOUND_CHAR,.@OptID,.@OptVal,.@OptParam;
 
 ---------------------------------------
 
@@ -5580,6 +5624,40 @@ Note: delitem() in an NPC script can still remove rental items.
 
 ---------------------------------------
 
+*rentitem2(<item id>, <time>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>{, <account_id>})
+*rentitem2("<item name>", <time>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>{, <account_id>})
+*rentitem3(<item id>, <time>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>, <RandomIDArray>, <RandomValueArray>, <RandomParamArray>{, <account_id>})
+*rentitem3("<item name>", <time>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>, <RandomIDArray>, <RandomValueArray>, <RandomParamArray>{, <account_id>})
+*rentitem4(<item id>, <time>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>, <grade>, <RandomIDArray>, <RandomValueArray>, <RandomParamArray>{, <account_id>})
+*rentitem4("<item name>", <time>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>, <grade>, <RandomIDArray>, <RandomValueArray>, <RandomParamArray>{, <account_id>})
+
+Creates a rental item in the attached character's inventory. The item will expire
+in <time> seconds and be automatically deleted. See 'rentitem' for further details.
+
+See 'getitem2' for an explanation of the expanded parameters.
+
+'rentitem3' is advance version of 'rentitem2' that also use Item Random Option as additional values.
+<RandomIDArray>    : Array variable of ID for item random option, see db/[pre-]re/item_options.conf
+<RandomValueArray> : Array variable of item random option's value.
+<RandomParamArray> : Array variable of item random option's param.
+
+'rentitem4' is advance version of 'rentitem3' that also use the grade as additional values.
+Valid grades are:
+	ITEM_GRADE_NONE			- No grade
+	ITEM_GRADE_D			- Grade D
+	ITEM_GRADE_C			- Grade C
+	ITEM_GRADE_B			- Grade B
+	ITEM_GRADE_A			- Grade A
+
+Example to get Crimson Weapon with Ghost property:
+	// +9 Crimson Dagger [2]
+	setarray .@OptID[0],RDMOPT_WEAPON_ATTR_TELEKINESIS;
+	setarray .@OptVal[0],0;
+	setarray .@OptParam[0],0;
+	rentitem3 28705,(24*60*60),1,9,0,0,0,0,0,.@OptID,.@OptVal,.@OptParam;
+
+---------------------------------------
+
 *makeitem(<item id>, <amount>, "<map name>", <x>, <y> {,<showdropeffect>})
 *makeitem("<item name>", <amount>, "<map name>", <x>, <y>)
 
@@ -5603,6 +5681,39 @@ will be used.
 
 *makeitem2(<item id>,<amount>,<identify>,<refine>,<attribute>,<card1>,<card2>,<card3>,<card4>,{"<map name>",<X>,<Y>,<range>})
 *makeitem2("<item name>",<amount>,<identify>,<refine>,<attribute>,<card1>,<card2>,<card3>,<card4>,{"<map name>",<X>,<Y>,<range>})
+*makeitem3(<item id>, <amount>, "<map name>", <X>, <Y>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>, <RandomIDArray>, <RandomValueArray>, <RandomParamArray>{, <canShowEffect>})
+*makeitem3("<item name>", <amount>, "<map name>", <X>, <Y>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>, <RandomIDArray>, <RandomValueArray>, <RandomParamArray>{, <canShowEffect>})
+*makeitem4(<item id>, <amount>, "<map name>", <X>, <Y>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>, <grade>, <RandomIDArray>, <RandomValueArray>, <RandomParamArray>{, <canShowEffect>})
+*makeitem4("<item name>", <amount>, "<map name>", <X>, <Y>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>, <grade>, <RandomIDArray>, <RandomValueArray>, <RandomParamArray>{, <canShowEffect>})
+
+See 'getitem2' for an explanation of the expanded parameters.
+
+'makeitem3' is advance version of 'makeitem2' that also use Item Random Option as additional values.
+<RandomIDArray>    : Array variable of ID for item random option, see db/[pre-]re/item_options.conf
+<RandomValueArray> : Array variable of item random option's value.
+<RandomParamArray> : Array variable of item random option's param.
+
+'makeitem4' is advance version of 'makeitem3' that also use the grade as additional values.
+Valid grades are:
+	ITEM_GRADE_NONE			- No grade
+	ITEM_GRADE_D			- Grade D
+	ITEM_GRADE_C			- Grade C
+	ITEM_GRADE_B			- Grade B
+	ITEM_GRADE_A			- Grade A
+
+Example to get Crimson Weapon with Ghost property:
+	// 0.5% chance to get +0 Valkyrie Shield [1]
+	// with Neutral Resistance +10% and 5% damage reduction from Demi-Human or Player
+	// when Valkyrie Randgris killed
+	OnNPCKillEvent:
+		if (killedrid == 1751 && rand(0,10000) > 9950) { // Valkyrie Randgris
+			getmapxy(.@map$,.@x,.@y,BL_PC);
+			setarray .@OptID[0],RDMOPT_ATTR_TOLERACE_NOTHING,RDMOPT_RACE_TOLERACE_HUMAN;
+			setarray .@OptVal[0],10,5;
+			setarray .@OptParam[0],0;
+			makeitem3 2115,1,.@map$,.@x,.@y,0,0,0,0,0,0,0,.@OptID,.@OptVal,.@OptParam;
+		}
+		end;
 
 This script command work like 'makeitem', but it has additional parameters
 to expand the usage of the script command.
@@ -5672,10 +5783,21 @@ the database. If the name is not found, nothing will be deleted.
 
 *delitem2(<item id>, <amount>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>{, <account ID>})
 *delitem2("<item name>", <amount>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>{, <account ID>})
+*delitem3(<item id>, <amount>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>, <RandomIDArray>, <RandomValueArray>, <RandomParamArray>{, <account ID>})
+*delitem3("<item name>", <amount>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>, <RandomIDArray>, <RandomValueArray>, <RandomParamArray>{, <account ID>})
+*delitem4(<item id>, <amount>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>, <grade>, <RandomIDArray>, <RandomValueArray>, <RandomParamArray>{, <account ID>})
+*delitem4("<item name>", <amount>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>, <grade>, <RandomIDArray>, <RandomValueArray>, <RandomParamArray>{, <account ID>})
 
 This command will remove a specified amount of items from the invoking or
 target character.
 Check getitem2() to understand its expanded parameters.
+
+'delitem3' is advance version of 'delitem2' that also use Item Random Option as criteria.
+<RandomIDArray>    : Array variable of ID for item random option, see db/[pre-]re/item_options.conf
+<RandomValueArray> : Array variable of item random option's value.
+<RandomParamArray> : Array variable of item random option's param.
+
+'delitem4' is advance version of 'delitem3' that also use the grade as criteria.
 
 ---------------------------------------
 
@@ -5724,6 +5846,10 @@ database as an argument.
 
 *countitem2(<item id>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>)
 *countitem2("<item name>", <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>)
+*countitem3(<item id>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>, <RandomIDArray>, <RandomValueArray>, <RandomParamArray>{, <accountID>})
+*countitem3("<item name>", <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>, <RandomIDArray>, <RandomValueArray>, <RandomParamArray>{, <accountID>})
+*countitem4(<item id>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>, <grade>, <RandomIDArray>, <RandomValueArray>, <RandomParamArray>{, <accountID>})
+*countitem4("<item name>", <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>, <grade>, <RandomIDArray>, <RandomValueArray>, <RandomParamArray>{, <accountID>})
 
 Expanded version of countitem() function, used for created/carded/forged
 items.
@@ -5731,6 +5857,13 @@ items.
 This function will return the number of items for the specified item ID
 and other parameters that the invoking character has in the inventory.
 Check getitem2() to understand the arguments of the function.
+
+'countitem3' is advance version of 'countitem2' that also use Item Random Option as criteria.
+<RandomIDArray>    : Array variable of ID for item random option, see db/[pre-]re/item_options.conf
+<RandomValueArray> : Array variable of item random option's value.
+<RandomParamArray> : Array variable of item random option's param.
+
+'countitem4' is advance version of 'countitem3' that also use the grade as criteria.
 
 ---------------------------------------
 
