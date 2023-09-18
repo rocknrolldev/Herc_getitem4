@@ -5332,6 +5332,10 @@ script.
 
 *getitem2(<item id>, <amount>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>{, <account ID>})
 *getitem2("<item name>", <amount>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>{, <account ID>})
+*getitem3(<item id>, <amount>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>, <RandomIDArray>, <RandomValueArray>, <RandomParamArray>{, <account ID>})
+*getitem3("<item name>", <amount>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>, <RandomIDArray>, <RandomValueArray>, <RandomParamArray>{, <account ID>})
+*getitem4(<item id>, <amount>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>, <grade>, <RandomIDArray>, <RandomValueArray>, <RandomParamArray>{, <account ID>})
+*getitem4("<item name>", <amount>, <identify>, <refine>, <attribute>, <card1>, <card2>, <card3>, <card4>, <grade>, <RandomIDArray>, <RandomValueArray>, <RandomParamArray>{, <account ID>})
 
 This command will give an amount of specified items to the invoking
 character. If an optional account ID is specified, and the target
